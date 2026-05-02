@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Section } from "@/components/Section";
 import { CTAButton } from "@/components/CTAButton";
 import { Card } from "@/components/Card";
+import { CalendarEmbed } from "@/components/CalendarEmbed";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, UserCheck, MessageSquare, CalendarCheck, TrendingUp, CheckCircle2, ShieldCheck, Download, Smartphone, CalendarDays, Lock, Users, AlertTriangle } from "lucide-react";
 
@@ -86,7 +87,7 @@ const QUESTIONS: Question[] = [
 ];
 
 export default function Home() {
-  const [flowState, setFlowState] = useState<'landing' | 'form' | 'analyzing' | 'high' | 'mid' | 'low' | 'calendar'>('landing');
+  const [flowState, setFlowState] = useState<'landing' | 'form' | 'analyzing' | 'high' | 'mid' | 'low' | 'calendar' | 'post-booking'>('landing');
   const [score, setScore] = useState(0);
   const [hasHardReject, setHasHardReject] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -551,7 +552,7 @@ export default function Home() {
           </p>
 
           <div className="w-full mt-4">
-            <CTAButton onClick={() => window.location.href = "https://health.thequantpartners.com"} delay={1}>
+            <CTAButton onClick={() => window.location.href = "https://chat.whatsapp.com/FimY6e4phus9RThK6xqsla"} delay={1}>
               Unirme al grupo privado
             </CTAButton>
           </div>
@@ -577,7 +578,7 @@ export default function Home() {
           </p>
 
           <div className="w-full mt-4">
-            <CTAButton onClick={() => window.location.href = "https://health.thequantpartners.com"} delay={1}>
+            <CTAButton onClick={() => window.location.href = "https://chat.whatsapp.com/FimY6e4phus9RThK6xqsla"} delay={1}>
               Acceder a recursos gratuitos
             </CTAButton>
           </div>
@@ -596,11 +597,36 @@ export default function Home() {
             <p className="text-gray-500 font-medium">S/ 97 PEN (se descuenta de la implementación)</p>
           </div>
           
-          <div className="flex-1 p-6 flex flex-col items-center justify-center">
-            <Card className="h-[400px] w-full flex flex-col items-center justify-center border-dashed border-2 border-gray-300 bg-white shadow-sm">
-              <CalendarDays className="w-12 h-12 text-gray-300 mb-4" />
-              <p className="text-gray-500 font-medium">[Payment / Calendly Embed]</p>
-            </Card>
+          <div className="flex-1 px-4 pb-4 flex flex-col items-center justify-center">
+            <CalendarEmbed onBookingSuccess={() => setFlowState('post-booking')} />
+          </div>
+        </motion.div>
+      )}
+
+      {flowState === 'post-booking' && (
+        <motion.div
+          key="post-booking"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="h-full w-full bg-[#111827] flex flex-col justify-center items-center px-6 absolute inset-0 z-50 text-white text-center"
+        >
+          <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mb-6">
+            <CheckCircle2 className="w-10 h-10 text-green-400" />
+          </div>
+          <h2 className="text-3xl font-extrabold mb-4 leading-tight">
+            ¡Auditoría Agendada!
+          </h2>
+          <p className="text-gray-300 text-lg mb-8 font-medium">
+            Paso final obligatorio: Escríbenos por WhatsApp para confirmar tu espacio y recibir instrucciones.
+          </p>
+
+          <div className="w-full mt-4">
+            <CTAButton 
+              onClick={() => window.location.href = "https://wa.me/51924464410?text=Hola%20Quant%20Partners%2C%20acabo%20de%20agendar%20mi%20auditor%C3%ADa."} 
+              delay={0}
+            >
+              Confirmar por WhatsApp <ArrowRight className="w-5 h-5" />
+            </CTAButton>
           </div>
         </motion.div>
       )}
