@@ -24,7 +24,7 @@ export function CalendarEmbed({ onBookingSuccess }: { onBookingSuccess: () => vo
         namespace="quant-partners-dental-edition"
         calLink="the-quant-partners/quant-partners-dental-edition"
         style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        config={{ "layout": "month_view", "useSlotsViewOnSmallScreen": true, "theme": "dark" }}
+        config={{ "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": "dark" }}
       />
     </div>
   );
